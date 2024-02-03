@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './core/components/header/header.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     HeaderComponent,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent],
