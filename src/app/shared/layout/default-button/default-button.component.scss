@@ -1,0 +1,39 @@
+.btn{
+  width: 100% !important;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+  transition: 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+
+  &--action{
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  &--primary{
+    background-color: var(--primary);
+    &:hover{
+      background-color: var(--primary-dark);
+    }
+  }
+  &--secondary{
+    background-color: var(--secondary);
+    &:hover{
+      background-color: var(--secondary-dark);
+    }
+  }
+  &--cancel{
+    background-color: var(--red);
+    &:hover{
+      background-color: var(--red-dark);
+    }
+  }
+}
