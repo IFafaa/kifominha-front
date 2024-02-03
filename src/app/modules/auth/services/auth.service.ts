@@ -7,7 +7,11 @@ import { IRequest } from 'src/app/shared/interfaces/request.interface';
 import {
   IRegisterClient,
   IRegisterClientResponse,
-} from '../interfaces/client.interface';
+} from '../interfaces/register-client.interface';
+import {
+  IRegisterRestaurant,
+  IRegisterRestaurantResponse,
+} from '../interfaces/register-restaurant.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +32,15 @@ export class AuthService {
     return this.http.post<IRequest<IRegisterClientResponse>>(
       `${environment.api}auth/register/client`,
       registerClient
+    );
+  }
+
+  registerRestaurant(
+    registerRestaurant: IRegisterRestaurant
+  ): Observable<IRequest<IRegisterRestaurantResponse>> {
+    return this.http.post<IRequest<IRegisterRestaurantResponse>>(
+      `${environment.api}auth/register/restaurant`,
+      registerRestaurant
     );
   }
 }

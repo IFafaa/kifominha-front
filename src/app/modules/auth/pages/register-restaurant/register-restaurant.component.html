@@ -1,29 +1,55 @@
 <section class="relative flex flex-wrap lg:h-screen lg:items-center">
-  <div class="w-full lg:w-4/12 z-10 bg-white">
+  <div class="w-full z-10 bg-white">
     <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-lg text-center">
-        <h1 class="text-2xl font-bold">Crie sua conta</h1>
+        <h1 class="text-2xl font-bold">Crie o seu restaurante</h1>
 
         <p class="mt-4 text-gray-500">É fácil e rápido!</p>
       </div>
 
       <form
         action=""
-        class="mx-auto mb-0 mt-8 max-w-md space-y-4"
+        class="mx-auto mb-0 mt-8 max-w-xl space-y-4"
         [formGroup]="form"
       >
         <div>
           <mat-form-field>
-            <mat-label>Nome</mat-label>
+            <mat-label>Nome do restaurante</mat-label>
             <input
               matInput
-              placeholder="Digite seu nome"
+              placeholder="Digite o nome do seu restaurante"
               formControlName="name"
             />
             <mat-error *ngIf="form.controls.name.hasError('required')"
-              >Por favor, digite o seu nome</mat-error
+              >Por favor, digite nome do seu restaurante</mat-error
             >
           </mat-form-field>
+        </div>
+
+        <div>
+          <div>Envie sua logo*</div>
+          <div class="text-center">
+            <label for="fileInput">
+              <input
+                id="fileInput"
+                type="file"
+                (change)="onFileSelected($event)"
+                class="hidden"
+                accept="image/*"
+              />
+              <img
+                *ngIf="imageUrl"
+                [src]="imageUrl"
+                alt="Uploaded Image"
+                class="mt-4 max-w-full rounded shadow-md"
+              />
+              <span
+                *ngIf="!imageUrl"
+                class="block w-100 bg-gray-50 border-dotted border-2 border-gray-500 p-4"
+                >teste</span
+              >
+            </label>
+          </div>
         </div>
 
         <div>
@@ -45,18 +71,18 @@
 
         <div>
           <mat-form-field>
-            <mat-label>CPF</mat-label>
+            <mat-label>CNPJ</mat-label>
             <input
               matInput
-              placeholder="Digite seu CPF"
-              formControlName="cpf"
-              mask="000.000.000-00"
+              placeholder="Digite seu CNPJ"
+              formControlName="cnpj"
+              mask="00.000.000/0000-00"
             />
-            <mat-error *ngIf="form.controls.cpf.hasError('required')"
-              >Por favor, digite o seu CPF</mat-error
+            <mat-error *ngIf="form.controls.cnpj.hasError('required')"
+              >Por favor, digite o seu CNPJ</mat-error
             >
-            <mat-error *ngIf="form.controls.cpf.hasError('cpfCnpj')"
-              >Por favor, digite um CPF válido</mat-error
+            <mat-error *ngIf="form.controls.cnpj.hasError('cpfCnpj')"
+              >Por favor, digite um CNPJ válido</mat-error
             >
           </mat-form-field>
         </div>
@@ -119,6 +145,50 @@
           </mat-form-field>
         </div>
 
+        <div formGroupName="address">
+          <div class="col-6">
+            <mat-form-field class="mb-2">
+              <mat-label>CEP</mat-label>
+              <input
+                matInput
+                formControlName="cep"
+                mask="00000-000"
+                (input)="getCep(form.controls.address.controls.cep.value!)"
+              />
+              <mat-error
+                *ngIf="form.controls.address.controls.cep.hasError('required')"
+                >Por favor, digite o seu CEP</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  form.controls.address.controls.cep.hasError('minlength') ||
+                  form.controls.address.controls.cep.hasError('invalidCep')
+                "
+                >Por favor, digite um CEP válido</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="mb-2">
+              <mat-label>Número</mat-label>
+              <input
+                matInput
+                formControlName="number"
+                maxlength="5"
+                mask="99999"
+                (input)="setAddressString()"
+              />
+              <mat-error
+                *ngIf="
+                  form.get('location')?.get('number')?.hasError('required')
+                "
+                >Campo obrigatório</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-12 text--little" *ngIf="address">{{ address }}</div>
+        </div>
+
         <div class="pt-5">
           <default-button
             value="Criar"
@@ -133,13 +203,5 @@
         </div>
       </form>
     </div>
-  </div>
-
-  <div class="relative h-full w-full lg:w-8/12 z-0">
-    <img
-      alt="Food Image"
-      src="https://hips.hearstapps.com/hmg-prod/images/grilled-chicken-breast-lunch-bowl-with-fresh-tomato-royalty-free-image-1684934244.jpg"
-      class="absolute inset-0 h-full w-full object-cover"
-    />
   </div>
 </section>
