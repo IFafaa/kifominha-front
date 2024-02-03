@@ -11,9 +11,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FooterComponent } from './core/components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

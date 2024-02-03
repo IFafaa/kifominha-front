@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,22 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  routesToHidden = [
+    '/',
+    '/register/client',
+    '/register/restaurant',
+    '/verify-email/:id/:type',
+  ];
+  url!: string;
+
+  constructor(private router: Router) {
+    this.url = router.url;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.url = event.url;
+        console.log('url', this.url);
+      }
+    });
+  }
+}

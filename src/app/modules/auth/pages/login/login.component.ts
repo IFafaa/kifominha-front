@@ -5,6 +5,7 @@ import { ILogin } from '../../interfaces/login.interface';
 import { TokenService } from '../../../../core/services/token.service';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
     private readonly authService: AuthService,
     private readonly tokenService: TokenService,
     private readonly toastrService: ToastrService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly userService: UserService
   ) {}
 
   signIn() {
@@ -32,7 +34,9 @@ export class LoginComponent {
     this.authService.signIn(this.form.value as ILogin).subscribe({
       next: (res) => {
         this.tokenService.setToken(res.data.access_token);
-        this.router.navigate(['']);
+        console.log(`/${this.userService.typeUser()}/home`);
+
+        this.router.navigate([`/${this.userService.typeUser()}/home`]);
       },
       error: (err) => {
         this.toastrService.error(err.error.message);
