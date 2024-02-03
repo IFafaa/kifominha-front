@@ -1,0 +1,74 @@
+<section class="relative flex flex-wrap lg:h-screen lg:items-center">
+  <div class="w-full lg:w-4/12 z-10 bg-white">
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-lg text-center">
+        <h1 class="text-2xl font-bold">Login</h1>
+
+        <p class="mt-4 text-gray-500">
+          Bem-vindo de volta! Por favor, faça o login para acessar sua conta.
+        </p>
+      </div>
+
+      <form
+        action=""
+        class="mx-auto mb-0 mt-8 max-w-md space-y-4"
+        [formGroup]="form"
+      >
+        <div>
+          <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              placeholder="Digite seu e-mail"
+              formControlName="email"
+            />
+            <mat-error *ngIf="form.controls.email.hasError('required')"
+              >Por favor, digite o seu e-mail</mat-error
+            >
+            <mat-error *ngIf="form.controls.email.hasError('email')"
+              >Por favor, digite um e-mail válido</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div>
+          <div>
+            <mat-form-field>
+              <mat-label>Senha</mat-label>
+              <input
+                matInput
+                type="password"
+                placeholder="Digite sua senha"
+                formControlName="password"
+              />
+              <mat-error *ngIf="form.controls.password.hasError('required')"
+                >Por favor, digite a sua senha</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="pt-5">
+          <default-button
+            value="Entrar"
+            (clickEvent)="signIn()"
+          ></default-button>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500 text-center">
+            Não tem uma conta?
+            <a class="underline" href="">Crie uma</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="relative h-full w-full lg:w-8/12 z-0">
+    <img
+      alt="Food Image"
+      src="https://hips.hearstapps.com/hmg-prod/images/grilled-chicken-breast-lunch-bowl-with-fresh-tomato-royalty-free-image-1684934244.jpg"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+  </div>
+</section>
