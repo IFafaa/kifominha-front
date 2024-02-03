@@ -5,6 +5,8 @@ import { ToastrService } from '../../../../core/services/toastr.service';
 import { CepService } from '../../../../core/services/cep.service';
 import { AuthService } from '../../services/auth.service';
 import { IRegisterRestaurant } from '../../interfaces/register-restaurant.interface';
+import { Router } from '@angular/router';
+import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
 
 @Component({
   selector: 'app-register-restaurant',
@@ -36,7 +38,8 @@ export class RegisterRestaurantComponent {
     private readonly fb: FormBuilder,
     private readonly toastrService: ToastrService,
     private readonly cepService: CepService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   onFileSelected(event: any): void {
@@ -124,13 +127,16 @@ export class RegisterRestaurantComponent {
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value);
     const restaurant = this.form.value;
     delete restaurant.confirmPassword;
     this.authService
       .registerRestaurant(restaurant as IRegisterRestaurant)
       .subscribe({
-        next: (res) => {},
+        next: (res) => {
+          this.router.navigate([
+            `verify-email/${res.data.id}/${ENUM_USER_TYPE.RESTAURANT}`,
+          ]);
+        },
         error: (err) => {
           this.toastrService.error(err.error.message);
         },

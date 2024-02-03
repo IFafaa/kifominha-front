@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { IRegisterClient } from '../../interfaces/register-client.interface';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { Router } from '@angular/router';
+import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
 
 @Component({
   selector: 'app-register-client',
@@ -53,7 +54,11 @@ export class RegisterClientComponent {
     const client = this.form.value;
     delete client.confirmPassword;
     this.authService.registerClient(client as IRegisterClient).subscribe({
-      next: (res) => {},
+      next: (res) => {
+        this.router.navigate([
+          `verify-email/${res.data.id}/${ENUM_USER_TYPE.CLIENT}`,
+        ]);
+      },
       error: (err) => {
         this.toastrService.error(err.error.message);
       },

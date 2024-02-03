@@ -1,18 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
-@import './app/shared/scss/spinner.scss';
-@import './app/shared/scss/default.scss';
-@import './app/shared/scss/material.scss';
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+@import "./app/shared/scss/spinner.scss";
+@import "./app/shared/scss/default.scss";
+@import "./app/shared/scss/material.scss";
 
 * {
-  padding:  0;
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif !important;}
+  font-family: "Poppins", sans-serif !important;
+}
 
-:root{
+:root {
   --red: #dc3545;
   --red-dark: #b62b39;
   --green: #28a745;
@@ -23,11 +24,15 @@
   --white: white;
 
   --secondary-very-light: #7cbbb833;
-  --secondary: #3FBEB8;
+  --secondary: #3fbeb8;
   --secondary-dark: #3aa39e;
   --primary-dark: #3981aa;
   --primary: #1c7eb8;
-  --yellow: #D4E0A1;
+  --yellow: #d4e0a1;
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}

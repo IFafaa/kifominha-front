@@ -4,7 +4,8 @@
   'btn--primary': type == 'primary',
   'btn--secondary': type == 'secondary',
   'btn--cancel': type == 'cancel',
-  'btn--action': !value
+  'btn--action': !value,
+  'btn--disabled': disabled
   }"
   [disabled]="disabled"
   (click)="clickEvent.emit()"

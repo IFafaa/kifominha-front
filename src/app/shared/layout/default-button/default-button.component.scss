@@ -18,6 +18,13 @@
     height: 40px !important;
   }
 
+  &--disabled{
+    opacity: 0.5;
+    &:hover{
+      background-color: var(--primary) !important;
+    }
+  }
+
   &--primary{
     background-color: var(--primary);
     &:hover{

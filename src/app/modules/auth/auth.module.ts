@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterRestaurantComponent } from './pages/register-restaurant/register-restaurant.component';
 import { RegisterClientComponent } from './pages/register-client/register-client.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
     path: 'register/client',
     component: RegisterClientComponent,
   },
+  {
+    path: 'verify-email/:id/:type',
+    component: VerifyEmailComponent,
+  },
 ];
 
 @NgModule({
@@ -30,6 +35,7 @@ const routes: Routes = [
     LoginComponent,
     RegisterRestaurantComponent,
     RegisterClientComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     CommonModule,

@@ -12,6 +12,7 @@ import {
   IRegisterRestaurant,
   IRegisterRestaurantResponse,
 } from '../interfaces/register-restaurant.interface';
+import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,19 @@ export class AuthService {
     return this.http.post<IRequest<IRegisterRestaurantResponse>>(
       `${environment.api}auth/register/restaurant`,
       registerRestaurant
+    );
+  }
+
+  verifyEmail(
+    code: string,
+    type: ENUM_USER_TYPE,
+    id: string
+  ): Observable<IRequest<ILoginResponse>> {
+    return this.http.post<IRequest<ILoginResponse>>(
+      `${environment.api}auth/verify/${type}/email/${id}`,
+      {
+        code: code,
+      }
     );
   }
 }
