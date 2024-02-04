@@ -28,7 +28,6 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     NgxSpinnerModule,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,

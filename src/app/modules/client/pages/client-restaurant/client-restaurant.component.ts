@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant.service';
 import { Observable } from 'rxjs';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
+import { FoodService } from '../../../../core/services/food.service';
+import { IFood } from 'src/app/core/services/interfaces/food.interface';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-client-restaurant',
@@ -11,14 +14,18 @@ import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interfa
 })
 export class ClientRestaurantComponent implements OnInit {
   restaurant!: IRestaurant;
+  foods = new Observable<IFood[]>();
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly restaurantService: RestaurantService
+    private readonly restaurantService: RestaurantService,
+    private readonly foodService: FoodService,
+    private readonly matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.getRestaurant(params['id']);
+      this.getFoods(params['id']);
     });
   }
 
@@ -28,5 +35,12 @@ export class ClientRestaurantComponent implements OnInit {
         this.restaurant = restaurant;
       },
     });
+  }
+  getFoods(restaurantId: string) {
+    this.foods = this.foodService.getFoodsByRestaurant(restaurantId);
+  }
+
+  viewFood(foodId: string) {
+    // this.matDialog.open()
   }
 }

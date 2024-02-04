@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ClientRestaurantComponent } from './pages/client-restaurant/client-restaurant.component';
+import { FoodCardComponent } from './components/food-card/food-card.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   { path: 'home', component: ClientHomeComponent },
@@ -20,6 +22,7 @@ const routes: Routes = [
     ClientHomeComponent,
     RestaurantCardComponent,
     ClientRestaurantComponent,
+    FoodCardComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatDialogModule
   ],
 })
 export class ClientModule {}
