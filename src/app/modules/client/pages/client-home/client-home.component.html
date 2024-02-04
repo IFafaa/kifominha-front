@@ -3,15 +3,8 @@
     Olá <strong class="capitalize">{{ client.name.split(" ")[0] }}</strong>
   </h1>
 
-  <div>
-    <mat-form-field class="example-form-field">
-      <mat-label>Pesquisar</mat-label>
-      <input
-        matInput
-        [(ngModel)]="searchQuery"
-        placeholder="Busque por item ou loja"
-      />
-    </mat-form-field>
+  <div class="my-4">
+    <default-search-input (searchEvent)="search($event)"></default-search-input>
   </div>
 
   <div>
@@ -20,7 +13,7 @@
         <div class="flex flex-wrap gap-3 max-w-[1024px] pt-4 p-3">
           <ng-container
             *ngIf="
-              $restaurants | async as restaurants;
+              restaurants$ | async as restaurants;
               else noRestaurantTemplate
             "
           >
@@ -35,7 +28,19 @@
           </ng-template>
         </div>
       </mat-tab>
-      <mat-tab label="Itens"> Content 2 </mat-tab>
+      <mat-tab label="Itens">
+        <div class="flex flex-wrap gap-3 max-w-[1024px] pt-4 p-3">
+          <ng-container *ngIf="foods$ | async as foods">
+            <ng-container *ngFor="let food of foods">
+              <app-food-card
+                [food]="food"
+                (click)="viewFood(food._id)"
+                class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
+              ></app-food-card>
+            </ng-container>
+          </ng-container>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>

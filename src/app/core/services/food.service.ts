@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IFood } from './interfaces/food.interface';
 import { Observable } from 'rxjs';
@@ -11,10 +11,15 @@ export class FoodService {
   constructor(private readonly http: HttpClient) {}
 
   getFoodsByRestaurant(idRestaurant: string): Observable<IFood[]> {
+    return this.http.get<IFood[]>(
+      `${environment.api}food/by/restaurant/${idRestaurant}`
+    );
+  }
+
+  getFoods(params?: Partial<IFood>): Observable<IFood[]> {
+    const _params = params as HttpParams;
     return this.http.get<IFood[]>(`${environment.api}food/`, {
-      params: {
-        restaurant_id: idRestaurant,
-      },
+      params: _params,
     });
   }
 }

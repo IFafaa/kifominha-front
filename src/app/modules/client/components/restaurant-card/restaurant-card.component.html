@@ -7,15 +7,20 @@
     alt="restaurant Image"
   />
 
-  <div class="p-2">
+  <div class="p-2 w-2/3">
     <div class="flex-1">
       <strong class="font-semibold mb-2 text-sm">{{ restaurant.name }}</strong>
     </div>
 
-    <div class="flex items-center mb-2 text-xs" *ngFor="let category of restaurant.categories; let last = last">
-      {{ category.name }} <span *ngIf="!last">-</span>
+    <div>
+      <span
+        class="mb-2 text-xs"
+        *ngFor="let category of restaurant.categories; let last = last"
+      >
+        {{ category.name }} <span *ngIf="!last">-</span>
+      </span>
     </div>
-
+    <br>
     <div class="flex items-center">
       <svg
         class="w-4 h-4 text-yellow-500 mr-1"
