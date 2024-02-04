@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant.service';
-import { Observable } from 'rxjs';
+import { Observable, share } from 'rxjs';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { FoodService } from '../../../../core/services/food.service';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
@@ -37,7 +37,9 @@ export class ClientRestaurantComponent implements OnInit {
     });
   }
   getFoods(restaurantId: string) {
-    this.foods = this.foodService.getFoodsByRestaurant(restaurantId);
+    this.foods = this.foodService
+      .getFoodsByRestaurant(restaurantId)
+      .pipe(share());
   }
 
   viewFood(foodId: string) {

@@ -18,11 +18,21 @@
     <mat-tab-group>
       <mat-tab label="Restaurantes">
         <div class="flex flex-wrap gap-3 max-w-[1024px] pt-4 p-3">
-          <app-restaurant-card
-            *ngFor="let restaurant of $restaurants | async"
-            [restaurant]="restaurant"
-            (click)="viewRestaurant(restaurant._id)"
-          ></app-restaurant-card>
+          <ng-container
+            *ngIf="
+              $restaurants | async as restaurants;
+              else noRestaurantTemplate
+            "
+          >
+            <app-restaurant-card
+              *ngFor="let restaurant of restaurants"
+              [restaurant]="restaurant"
+              (click)="viewRestaurant(restaurant._id)"
+            ></app-restaurant-card>
+          </ng-container>
+          <ng-template #noRestaurantTemplate>
+            <p class="text-center w-full p-7">Nenhum restaurante encontrado.</p>
+          </ng-template>
         </div>
       </mat-tab>
       <mat-tab label="Itens"> Content 2 </mat-tab>

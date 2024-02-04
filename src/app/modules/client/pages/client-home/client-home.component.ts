@@ -3,7 +3,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { IClient } from 'src/app/core/services/interfaces/client.interface';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { RestaurantService } from '../../services/restaurant.service';
-import { Observable } from 'rxjs';
+import { Observable, share } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class ClientHomeComponent implements OnInit {
   }
 
   getRestaurants() {
-    this.$restaurants = this.restaurantService.getRestaurants();
+    this.$restaurants = this.restaurantService.getRestaurants().pipe(share());
   }
 
   viewRestaurant(restaurantId: string) {
