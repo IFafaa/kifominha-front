@@ -12,6 +12,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],
@@ -31,6 +32,11 @@ import { FooterComponent } from './core/components/footer/footer.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { cpfCnpjValidator } from 'src/app/shared/validators/cpfCnpj.validator';
 import { ToastrService } from '../../../../core/services/toastr.service';
@@ -7,13 +7,16 @@ import { AuthService } from '../../services/auth.service';
 import { IRegisterRestaurant } from '../../interfaces/register-restaurant.interface';
 import { Router } from '@angular/router';
 import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
+import { CategoryService } from '../../../../core/services/category.service';
+import { Observable } from 'rxjs';
+import { ICategory } from 'src/app/core/services/interfaces/category.interface';
 
 @Component({
   selector: 'app-register-restaurant',
   templateUrl: './register-restaurant.component.html',
   styleUrls: ['./register-restaurant.component.scss'],
 })
-export class RegisterRestaurantComponent {
+export class RegisterRestaurantComponent implements OnInit {
   imageUrl!: string;
   address: string = '';
   form = this.fb.group({
@@ -22,6 +25,7 @@ export class RegisterRestaurantComponent {
     name: ['', [Validators.required]],
     cnpj: ['', [Validators.required, cpfCnpjValidator()]],
     phone: ['', [Validators.required, Validators.minLength(11)]],
+    categories: [[], [Validators.required]],
     address: this.fb.group({
       cep: ['', [Validators.required, Validators.minLength(8)]],
       number: ['', [Validators.required]],
@@ -34,13 +38,24 @@ export class RegisterRestaurantComponent {
     confirmPassword: ['', [Validators.required]],
   });
 
+  $categories = new Observable<ICategory[]>();
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly toastrService: ToastrService,
     private readonly cepService: CepService,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly categoryService: CategoryService
   ) {}
+
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.$categories = this.categoryService.getCategories()
+  }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

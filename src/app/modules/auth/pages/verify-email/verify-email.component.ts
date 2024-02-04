@@ -44,7 +44,7 @@ export class VerifyEmailComponent implements OnInit {
       .verifyEmail(this.codeControl.value!, this.type, this.idUser)
       .subscribe({
         next: (res) => {
-          this.tokenService.setToken(res.data.access_token);
+          this.toastrService.success(res.message);
           this.router.navigate(['/']);
         },
         error: (err) => {

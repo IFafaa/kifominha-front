@@ -26,4 +26,5 @@ export interface IRestaurant {
   auth: IRestaurantAuth;
   address: IAddress;
   logo: string;
+  categories: { _id: string; name: string }[];
 }

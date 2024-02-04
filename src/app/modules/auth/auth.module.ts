@@ -10,6 +10,7 @@ import { RegisterRestaurantComponent } from './pages/register-restaurant/registe
 import { RegisterClientComponent } from './pages/register-client/register-client.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatInputModule,
     ReactiveFormsModule,
     NgxMaskModule.forChild(),
+    MatSelectModule,
   ],
 })
 export class AuthModule {}

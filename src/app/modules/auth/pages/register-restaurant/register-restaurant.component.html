@@ -52,6 +52,20 @@
           </div>
         </div>
 
+        <mat-form-field>
+          <mat-label>Categorias</mat-label>
+          <mat-select formControlName="categories" multiple>
+            <mat-option
+              *ngFor="let category of $categories | async"
+              [value]="category"
+              >{{ category.name }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="form.controls.categories.hasError('required')"
+            >Por favor, selecione ao menos uma categoria</mat-error
+          >
+        </mat-form-field>
+
         <div>
           <mat-form-field>
             <mat-label>E-mail</mat-label>

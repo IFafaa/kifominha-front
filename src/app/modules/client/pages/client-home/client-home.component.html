@@ -1,4 +1,31 @@
 <div class="w-[90%] mx-auto max-w-[1024px] my-5">
-  <h1 class="text-4xl font-bold">Olá {{ client.name.split(" ")[0] }}</h1>
-</div>
+  <h1 class="text-6xl font-bold">
+    Olá <strong class="capitalize">{{ client.name.split(" ")[0] }}</strong>
+  </h1>
 
+  <div>
+    <mat-form-field class="example-form-field">
+      <mat-label>Pesquisar</mat-label>
+      <input
+        matInput
+        [(ngModel)]="searchQuery"
+        placeholder="Busque por item ou loja"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-tab-group>
+      <mat-tab label="Restaurantes">
+        <div class="flex flex-wrap gap-3 max-w-[1024px] pt-4 p-3">
+          <app-restaurant-card
+            *ngFor="let restaurant of $restaurants | async"
+            [restaurant]="restaurant"
+            (click)="viewRestaurant(restaurant._id)"
+          ></app-restaurant-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Itens"> Content 2 </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -31,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `${token}`,
         },
       });
+
       return next.handle(authRequest).pipe(
         catchError((error: any) => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
