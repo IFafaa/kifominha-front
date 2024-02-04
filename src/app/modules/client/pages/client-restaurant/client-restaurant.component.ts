@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ClientRestaurantComponent implements OnInit {
   restaurant!: IRestaurant;
-  foods = new Observable<IFood[]>();
+  foods$ = new Observable<IFood[]>();
   constructor(
     private readonly route: ActivatedRoute,
     private readonly restaurantService: RestaurantService,
@@ -37,9 +37,13 @@ export class ClientRestaurantComponent implements OnInit {
     });
   }
   getFoods(restaurantId: string) {
-    this.foods = this.foodService
+    this.foods$ = this.foodService
       .getFoodsByRestaurant(restaurantId)
       .pipe(share());
+  }
+
+  hasFood(categoryId: string, foods: IFood[]) {
+    return foods.find((food) => {food.category._id === categoryId});
   }
 
   viewFood(foodId: string) {

@@ -12,6 +12,7 @@ import { ClientRestaurantComponent } from './pages/client-restaurant/client-rest
 import { FoodCardComponent } from './components/food-card/food-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMaskModule } from 'ngx-mask';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   { path: 'home', component: ClientHomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
     MatInputModule,
     MatDialogModule,
     NgxMaskModule.forChild(),
+    SharedModule
   ],
 })
 export class ClientModule {}
