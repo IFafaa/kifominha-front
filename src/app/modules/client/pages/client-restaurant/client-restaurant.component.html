@@ -1,8 +1,24 @@
 <div class="w-[90%] mx-auto max-w-[1024px] my-5">
   <div class="flex">
     <img [src]="restaurant.logo" alt="restaurant logo" class="rounded-full" />
-    <div>
-      <p class="text-3xl">{{ restaurant.name }}</p>
+    <div class="ml-5">
+      <strong class="text-3xl">{{ restaurant.name }}</strong>
+      <div class="mt-10">
+        <p class="flex gap-1 items-center">
+          <img
+            src="../../../../../assets/images/icons/call.svg"
+            alt="telefone"
+          />
+          {{ restaurant.phone | mask : "(00) 0 0000-0000" }}
+        </p>
+        <p></p>
+        <p class="flex gap-1 items-center">
+          <img
+            src="../../../../../assets/images/icons/draft.svg"
+            alt="cnpj"
+          />{{ restaurant.cnpj | mask : "00.000.000/0000-00" }}
+        </p>
+      </div>
     </div>
   </div>
   <div>

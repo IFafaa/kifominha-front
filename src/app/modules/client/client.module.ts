@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ClientRestaurantComponent } from './pages/client-restaurant/client-restaurant.component';
 import { FoodCardComponent } from './components/food-card/food-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgxMaskModule } from 'ngx-mask';
 
 const routes: Routes = [
   { path: 'home', component: ClientHomeComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxMaskModule.forChild(),
   ],
 })
 export class ClientModule {}
