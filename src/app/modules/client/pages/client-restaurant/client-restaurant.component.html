@@ -5,8 +5,16 @@
   </div>
 
   <div class="flex items-center mt-10 flex-wrap">
-    <img [src]="restaurant.logo" alt="restaurant logo" class="rounded-full  w-full  sm:w-1/3 mx-auto max-w-40" />
-    <div class="border-b-[1px] md:border-b-[0px] px-4 w-full md:w-1/3 md:border-x-[1px] my-3 mx-auto">
+    <div class="w-full md:w-1/3 flex justify-center">
+      <img
+        [src]="restaurant.logo"
+        alt="restaurant logo"
+        class="rounded-full max-w-40"
+      />
+    </div>
+    <div
+      class="border-b-[1px] md:border-b-[0px] px-4 w-full md:w-1/3 md:border-x-[1px] my-3"
+    >
       <h3>Endereço</h3>
       <p class="flex gap-1 items-center text-gray-600">
         {{ restaurant.address.street }}, {{ restaurant.address.number }} -
@@ -19,7 +27,7 @@
       </p>
     </div>
 
-    <div class="px-4 w-full md:w-1/3 border-b-[1px] md:border-b-[0px] my-3 mx-auto">
+    <div class="px-4 w-full md:w-1/3 border-b-[1px] md:border-b-[0px] my-3">
       <h3>Outras informações</h3>
       <p class="flex gap-1 items-center text-gray-600">
         <img src="../../../../../assets/images/icons/call.svg" alt="telefone" />
@@ -44,7 +52,7 @@
               <app-food-card
                 *ngIf="food.category._id === categories._id"
                 [food]="food"
-                (click)="viewFood(food._id)"
+                (click)="viewFood(food)"
                 class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
               ></app-food-card>
             </ng-container>

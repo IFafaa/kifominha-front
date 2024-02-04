@@ -6,6 +6,7 @@ import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interfa
 import { FoodService } from '../../../../core/services/food.service';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
 import { MatDialog } from '@angular/material/dialog';
+import { FoodDetailsComponent } from '../../components/food-details/food-details.component';
 
 @Component({
   selector: 'app-client-restaurant',
@@ -43,10 +44,21 @@ export class ClientRestaurantComponent implements OnInit {
   }
 
   hasFood(categoryId: string, foods: IFood[]) {
-    return foods.find((food) => {food.category._id === categoryId});
+    return foods.find((food) => {
+      food.category._id === categoryId;
+    });
   }
 
-  viewFood(foodId: string) {
-    // this.matDialog.open()
+  viewFood(food: IFood) {
+    const dialogConfig = {
+      position: {
+        right: '0',
+        top: '0',
+      },
+      minHeight: '100vh',
+      maxWidth: '420px',
+      data: food,
+    };
+    this.matDialog.open(FoodDetailsComponent, dialogConfig).afterClosed();
   }
 }

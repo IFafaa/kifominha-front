@@ -9,6 +9,8 @@ import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
 import { FoodService } from '../../../../core/services/food.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FoodDetailsComponent } from '../../components/food-details/food-details.component';
 
 @Component({
   selector: 'app-client-home',
@@ -23,7 +25,8 @@ export class ClientHomeComponent implements OnInit {
     private readonly userService: UserService,
     private readonly restaurantService: RestaurantService,
     private readonly foodService: FoodService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +39,18 @@ export class ClientHomeComponent implements OnInit {
     this.getRestaurants(searchText);
   }
 
-  viewFood(food_id: string) {}
-
+  viewFood(food: IFood) {
+    const dialogConfig = {
+      position: {
+        right: '0',
+        top: '0',
+      },
+      minHeight: '100vh',
+      maxWidth: '420px',
+      data: food,
+    };
+    this.matDialog.open(FoodDetailsComponent, dialogConfig).afterClosed();
+  }
   getRestaurants(filter?: string) {
     this.restaurants$ = this.restaurantService
       .getRestaurants()

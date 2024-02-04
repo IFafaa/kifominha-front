@@ -13,6 +13,7 @@ import { FoodCardComponent } from './components/food-card/food-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FoodDetailsComponent } from './components/food-details/food-details.component';
 
 const routes: Routes = [
   { path: 'home', component: ClientHomeComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
     RestaurantCardComponent,
     ClientRestaurantComponent,
     FoodCardComponent,
+    FoodDetailsComponent,
   ],
   imports: [
     CommonModule,
