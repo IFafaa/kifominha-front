@@ -4,7 +4,7 @@ import { cpfCnpjValidator } from 'src/app/core/validators/cpfCnpj.validator';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { CepService } from '../../../../core/services/cep.service';
 import { AuthService } from '../../services/auth.service';
-import { IRegisterRestaurant } from '../../interfaces/register-restaurant.interface';
+import { IRegisterRestaurant } from '../../models/register-restaurant.interface';
 import { Router } from '@angular/router';
 import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 import { CategoryService } from '../../../../core/services/category.service';

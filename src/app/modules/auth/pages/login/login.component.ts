@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { ILogin } from '../../interfaces/login.interface';
+import { ILogin } from '../../models/login.interface';
 import { TokenService } from '../../../../core/services/token.service';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { Router } from '@angular/router';

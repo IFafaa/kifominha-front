@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ILogin, ILoginResponse } from '../interfaces/login.interface';
+import { ILogin, ILoginResponse } from '../models/login.interface';
 import { environment } from 'src/environment/environment';
 import { Observable } from 'rxjs';
 import { IRequest } from 'src/app/core/services/interfaces/request.interface';
 import {
   IRegisterClient,
   IRegisterClientResponse,
-} from '../interfaces/register-client.interface';
+} from '../models/register-client.interface';
 import {
   IRegisterRestaurant,
   IRegisterRestaurantResponse,
-} from '../interfaces/register-restaurant.interface';
+} from '../models/register-restaurant.interface';
 import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 
 @Injectable({
