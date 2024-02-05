@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../core/services/user.service';
 import { IClient } from 'src/app/core/services/interfaces/client.interface';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
-import { RestaurantService } from '../../services/restaurant.service';
+import { RestaurantService } from '../../../../core/services/restaurant.service';
 import { Observable, share } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 

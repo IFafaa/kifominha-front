@@ -1,0 +1,65 @@
+<div class="flex justify-between">
+  <h2>Cardápio</h2>
+
+  <div>
+    <default-button value="Adicionar" (clickEvent)="addFood()"></default-button>
+  </div>
+</div>
+<div class="table-container" *ngIf="foods">
+  <table>
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Categoria</th>
+        <th>Preço</th>
+        <th>Serve</th>
+        <th class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="foods.length && statusList == ENUM_STATUS_LIST.IDLE">
+        <tr
+          *ngFor="let food of foods; let i = index"
+          [paginacao]="{ indice: i, pagina: pageIndex, limitePagina: 5 }"
+        >
+          <td><img [src]="food.image" [alt]="food.name" /></td>
+          <td>{{ food.name }}</td>
+          <td>{{ food.description }}</td>
+          <td>{{ food.category.name }}</td>
+          <td>{{ food.price | currency : "BRL" : "symbol" : "1.2-2" }}</td>
+          <td>{{ food.serve }} pessoa(s)</td>
+          <td>
+            <div class="flex gap-2 justify-center">
+              <default-button icon="edit"></default-button>
+              <default-button icon="delete" type="cancel"></default-button>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <ng-container *ngIf="statusList === ENUM_STATUS_LIST.NOTFOUND">
+    <div class="p-5 flex w-full justify-center">
+      <span>Não foram encontrados registros</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="statusList === ENUM_STATUS_LIST.ERROR">
+    <div class="p-5 flex w-full justify-center">
+      <span
+        >Houve um problema ao realizar a consulta, tente novamente mais
+        tarde</span
+      >
+    </div>
+  </ng-container>
+  <div *ngIf="foods.length && statusList == ENUM_STATUS_LIST.IDLE">
+    <mat-paginator
+      [length]="foods.length"
+      [pageSize]="5"
+      (page)="pageIndex = $event.pageIndex"
+      [hidePageSize]="true"
+    >
+    </mat-paginator>
+  </div>
+</div>

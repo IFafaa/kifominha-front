@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RestaurantService } from '../../services/restaurant.service';
+import { RestaurantService } from '../../../../core/services/restaurant.service';
 import { Observable, share } from 'rxjs';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { FoodService } from '../../../../core/services/food.service';
@@ -16,7 +16,6 @@ import { ICategory } from 'src/app/core/services/interfaces/category.interface';
 })
 export class ClientRestaurantComponent implements OnInit {
   restaurant!: IRestaurant;
-  foods!: IFood[];
   categories: {
     category: ICategory;
     foods: IFood[];
@@ -49,8 +48,6 @@ export class ClientRestaurantComponent implements OnInit {
   getFoods(restaurantId: string) {
     this.foodService.getFoodsByRestaurant(restaurantId).subscribe({
       next: (foods) => {
-        this.foods = foods;
-        console.log(foods);
 
         this.categories = this.categories.map((category) => ({
           ...category,

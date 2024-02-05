@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FoodService } from '../../../../core/services/food.service';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
-import { RestaurantService } from '../../services/restaurant.service';
+import { RestaurantService } from '../../../../core/services/restaurant.service';
 import { Router } from '@angular/router';
 
 @Component({
