@@ -15,11 +15,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FoodEditComponent } from './components/food-edit/food-edit.component';
+import { RestaurantGuard } from 'src/app/core/guard/restaurant.guard';
+import { AuthGuard } from 'src/app/core/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     component: RestaurantHomeComponent,
+    canActivate: [AuthGuard, RestaurantGuard],
+
   },
 ];
 @NgModule({

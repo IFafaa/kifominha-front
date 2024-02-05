@@ -14,10 +14,20 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FoodDetailsComponent } from './components/food-details/food-details.component';
+import { AuthGuard } from 'src/app/core/guard/auth.guard';
+import { ClientGuard } from 'src/app/core/guard/client.guard';
 
 const routes: Routes = [
-  { path: 'home', component: ClientHomeComponent },
-  { path: 'restaurant/:id', component: ClientRestaurantComponent },
+  {
+    path: 'home',
+    component: ClientHomeComponent,
+    canActivate: [AuthGuard, ClientGuard],
+  },
+  {
+    path: 'restaurant/:id',
+    component: ClientRestaurantComponent,
+    canActivate: [AuthGuard, ClientGuard],
+  },
 ];
 
 @NgModule({
@@ -38,7 +48,7 @@ const routes: Routes = [
     MatInputModule,
     MatDialogModule,
     NgxMaskModule.forChild(),
-    SharedModule
+    SharedModule,
   ],
 })
 export class ClientModule {}

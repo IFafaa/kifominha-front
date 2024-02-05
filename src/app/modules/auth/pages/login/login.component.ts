@@ -12,7 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
@@ -26,10 +26,6 @@ export class LoginComponent implements OnInit {
     private readonly router: Router,
     private readonly userService: UserService
   ) {}
-
-  ngOnInit(): void {
-    this.tokenService.removeToken();
-  }
 
   signIn() {
     if (this.form.invalid) {
