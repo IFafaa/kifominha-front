@@ -35,6 +35,6 @@ export class FoodDetailsComponent implements OnInit {
   }
 
   close() {
-    this.close();
+    this.ref.close();
   }
 }

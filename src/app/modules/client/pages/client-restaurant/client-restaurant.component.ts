@@ -7,6 +7,7 @@ import { FoodService } from '../../../../core/services/food.service';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { FoodDetailsComponent } from '../../components/food-details/food-details.component';
+import { ICategory } from 'src/app/core/services/interfaces/category.interface';
 
 @Component({
   selector: 'app-client-restaurant',
@@ -15,7 +16,11 @@ import { FoodDetailsComponent } from '../../components/food-details/food-details
 })
 export class ClientRestaurantComponent implements OnInit {
   restaurant!: IRestaurant;
-  foods$ = new Observable<IFood[]>();
+  foods!: IFood[];
+  categories: {
+    category: ICategory;
+    foods: IFood[];
+  }[] = [];
   constructor(
     private readonly route: ActivatedRoute,
     private readonly restaurantService: RestaurantService,
@@ -34,18 +39,27 @@ export class ClientRestaurantComponent implements OnInit {
     this.restaurantService.getRestaurant(restaurantId).subscribe({
       next: (restaurant) => {
         this.restaurant = restaurant;
+        this.categories = restaurant.categories.map((category) => ({
+          category: category as ICategory,
+          foods: [] as IFood[],
+        }));
       },
     });
   }
   getFoods(restaurantId: string) {
-    this.foods$ = this.foodService
-      .getFoodsByRestaurant(restaurantId)
-      .pipe(share());
-  }
+    this.foodService.getFoodsByRestaurant(restaurantId).subscribe({
+      next: (foods) => {
+        this.foods = foods;
+        console.log(foods);
 
-  hasFood(categoryId: string, foods: IFood[]) {
-    return foods.find((food) => {
-      food.category._id === categoryId;
+        this.categories = this.categories.map((category) => ({
+          ...category,
+          foods: foods.filter(
+            (food) => food.category._id === category.category._id
+          ),
+        }));
+        console.log(this.categories);
+      },
     });
   }
 

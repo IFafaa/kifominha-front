@@ -43,14 +43,13 @@
   <div class="mt-5">
     <mat-tab-group>
       <mat-tab
-        *ngFor="let categories of restaurant.categories"
-        [label]="categories.name"
+        *ngFor="let category of categories"
+        [label]="category.category.name"
       >
         <div class="flex flex-wrap gap-3 max-w-[1024px] pt-4 p-3">
-          <ng-container *ngIf="foods$ | async as foods">
-            <ng-container *ngFor="let food of foods">
+          <ng-container *ngIf="category.foods.length; else noFoodTemplate">
+            <ng-container *ngFor="let food of category.foods">
               <app-food-card
-                *ngIf="food.category._id === categories._id"
                 [food]="food"
                 (click)="viewFood(food)"
                 class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
