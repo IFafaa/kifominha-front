@@ -21,6 +21,7 @@ export class ClientHomeComponent implements OnInit {
   client = this.userService.tokenDecoded<IClient>();
   restaurants$: Observable<IRestaurant[]> = new Observable();
   foods$: Observable<IFood[]> = new Observable();
+
   constructor(
     private readonly userService: UserService,
     private readonly restaurantService: RestaurantService,
@@ -52,8 +53,11 @@ export class ClientHomeComponent implements OnInit {
     this.matDialog.open(FoodDetailsComponent, dialogConfig).afterClosed();
   }
   getRestaurants(filter?: string) {
+    const restaurantFilter = {
+      name: filter,
+    };
     this.restaurants$ = this.restaurantService
-      .getRestaurants()
+      .getRestaurants(restaurantFilter)
       .pipe(share(), debounceTime(2000));
   }
 
