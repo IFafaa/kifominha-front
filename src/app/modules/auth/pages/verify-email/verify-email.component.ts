@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
+import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { finalize } from 'rxjs';

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { cpfCnpjValidator } from 'src/app/shared/validators/cpfCnpj.validator';
+import { cpfCnpjValidator } from 'src/app/core/validators/cpfCnpj.validator';
 import { AuthService } from '../../services/auth.service';
 import { IRegisterClient } from '../../interfaces/register-client.interface';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { Router } from '@angular/router';
-import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
+import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 
 @Component({
   selector: 'app-register-client',

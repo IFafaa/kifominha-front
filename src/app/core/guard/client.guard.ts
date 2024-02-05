@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
-import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
+import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 
 @Injectable({
   providedIn: 'root',

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { cpfCnpjValidator } from 'src/app/shared/validators/cpfCnpj.validator';
+import { cpfCnpjValidator } from 'src/app/core/validators/cpfCnpj.validator';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { CepService } from '../../../../core/services/cep.service';
 import { AuthService } from '../../services/auth.service';
 import { IRegisterRestaurant } from '../../interfaces/register-restaurant.interface';
 import { Router } from '@angular/router';
-import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
+import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 import { CategoryService } from '../../../../core/services/category.service';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/core/services/interfaces/category.interface';

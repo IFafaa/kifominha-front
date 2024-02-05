@@ -15,7 +15,7 @@ import { FooterComponent } from './core/components/footer/footer.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { CustomPaginationIntl } from './shared/config/custom.paginator.intl';
+import { CustomPaginationIntl } from './core/config/custom.paginator.intl';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],

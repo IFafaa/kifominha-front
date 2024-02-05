@@ -3,7 +3,7 @@ import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
 import { IClient } from './interfaces/client.interface';
 import { IRestaurant } from './interfaces/restaurant.interface';
-import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
+import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 
 @Injectable({
   providedIn: 'root',

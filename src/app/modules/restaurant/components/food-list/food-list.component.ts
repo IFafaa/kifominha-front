@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ENUM_STATUS_LIST } from 'src/app/shared/enums/list-status.enum';
+import { ENUM_STATUS_LIST } from 'src/app/core/enums/list-status.enum';
 import { FoodService } from '../../../../core/services/food.service';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
