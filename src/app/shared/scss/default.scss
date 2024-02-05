@@ -47,3 +47,23 @@ tbody tr:hover {
 .pointer {
   cursor: pointer;
 }
+
+.btn {
+  text-align: center;
+  padding: 9px 15px;
+  border-radius: 5px;
+}
+
+.btn-success {
+  background-color: var(--green);
+  color: white;
+}
+.btn-danger {
+  background-color: var(--red);
+  color: white;
+}
+
+a.btn.disabled,
+fieldset:disabled a.btn {
+  pointer-events: none;
+}

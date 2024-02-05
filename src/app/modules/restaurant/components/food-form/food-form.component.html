@@ -1,1 +1,107 @@
-<p>food-form works!</p>
+<form [formGroup]="form" class="flex flex-col h-full justify-between">
+  <div>
+    <div class="my-2">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="Digite o nome" formControlName="name" />
+        <mat-error *ngIf="form.controls.name.hasError('required')"
+          >Por favor, digite o nome do prato</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="my-2">
+      <div><span class="text-lg text-gray-500">Foto*</span></div>
+      <div class="text-center">
+        <label for="fileInput" class="hover:cursor-pointer">
+          <input
+            id="fileInput"
+            type="file"
+            (change)="onFileSelected($event)"
+            class="hidden"
+            accept="image/*"
+          />
+          <div
+            *ngIf="imageUrl"
+            class="w-[225px] h-[225px] bg-gray-50 border-dotted border-2 border-gray-500"
+          >
+            <img
+              [src]="imageUrl"
+              alt="Uploaded Image"
+              class="max-w-full rounded shadow-md bg-cover"
+            />
+          </div>
+          <span
+            *ngIf="!imageUrl"
+            class="block w-100 bg-gray-50 border-dotted border-2 border-gray-500 p-4"
+            >Envie a foto do prato</span
+          >
+        </label>
+      </div>
+    </div>
+
+    <div class="my-2">
+      <mat-form-field>
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category">
+          <mat-option
+            *ngFor="let category of restaurant.categories"
+            [value]="category._id"
+            >{{ category.name }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="form.controls.category.hasError('required')"
+          >Por favor, selecione a categoria do prato</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="my-2">
+      <mat-form-field>
+        <mat-label>Descrição</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. Hamburguer 200g, pão australiano..."
+          formControlName="description"
+        ></textarea>
+        <mat-error *ngIf="form.controls.description.hasError('required')"
+          >Por favor, digite a descrição do prato</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="my-2">
+      <mat-form-field>
+        <mat-label>Serve quantas pessoas</mat-label>
+        <input matInput formControlName="serve" type="number" />
+        <mat-error *ngIf="form.controls.serve.hasError('required')"
+          >Por favor, digite quantas pessoas serve</mat-error
+        >
+        <mat-error *ngIf="form.controls.serve.hasError('min')"
+          >Não pode servir 0 pessoas</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="my-2">
+      <mat-form-field>
+        <mat-label>Preço</mat-label>
+        <input matInput formControlName="price" type="number" />
+        <mat-error *ngIf="form.controls.price.hasError('required')"
+          >Por favor, digite o preço</mat-error
+        >
+        <mat-error *ngIf="form.controls.price.hasError('min')"
+          >O preço mínimo é de R$1,00</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div>
+    <default-button
+      [value]="food ? 'Salvar' : 'Cadastrar'"
+      [disabled]="form.invalid"
+      (clickEvent)="sendForm()"
+    ></default-button>
+  </div>
+</form>

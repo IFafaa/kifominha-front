@@ -3,6 +3,12 @@ import { ENUM_STATUS_LIST } from 'src/app/shared/enums/list-status.enum';
 import { FoodService } from '../../../../core/services/food.service';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FoodAddComponent } from '../food-add/food-add.component';
+import { ToastrService } from '../../../../core/services/toastr.service';
+import { finalize } from 'rxjs';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog.service';
+import { FoodEditComponent } from '../food-edit/food-edit.component';
 
 @Component({
   selector: 'app-food-list',
@@ -16,7 +22,12 @@ export class FoodListComponent implements OnInit {
   pageIndex: number = 0;
   foods!: IFood[];
 
-  constructor(private readonly foodService: FoodService) {}
+  constructor(
+    private readonly foodService: FoodService,
+    private readonly matDialog: MatDialog,
+    private readonly toastrService: ToastrService,
+    private readonly confirmDialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
     this.getFoods();
@@ -36,5 +47,65 @@ export class FoodListComponent implements OnInit {
     });
   }
 
-  addFood() {}
+  addFood() {
+    const dialogConfig: MatDialogConfig = {
+      position: {
+        right: '0',
+        top: '0',
+      },
+      minHeight: '100vh',
+      maxWidth: '420px',
+      data: this.restaurant,
+    };
+    this.matDialog
+      .open(FoodAddComponent, dialogConfig)
+      .afterClosed()
+      .subscribe((created: boolean) => {
+        if (created) {
+          this.getFoods();
+        }
+      });
+  }
+
+  editFood(food: IFood) {
+    const dialogConfig: MatDialogConfig = {
+      position: {
+        right: '0',
+        top: '0',
+      },
+      minHeight: '100vh',
+      maxWidth: '420px',
+      data: {
+        restaurant: this.restaurant,
+        food: food
+      },
+    };
+    this.matDialog
+      .open(FoodEditComponent, dialogConfig)
+      .afterClosed()
+      .subscribe((edited: boolean) => {
+        if (edited) {
+          this.getFoods();
+        }
+      });
+  }
+
+  deleteFood(food: IFood) {
+    const titleDialog = 'Deletar Prato';
+    const descDialog = 'Você realmente deseja deletar essa prato?';
+    this.confirmDialogService.confirm(titleDialog, descDialog, () => {
+      this.foodService
+        .deleteFood(food)
+        .pipe(
+          finalize(() => {
+            this.getFoods();
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            this.toastrService.success('Prato deletado com sucesso!');
+          },
+        });
+    });
+  }
 }

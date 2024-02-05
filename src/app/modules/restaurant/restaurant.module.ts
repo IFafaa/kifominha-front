@@ -8,6 +8,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FoodFormComponent } from './components/food-form/food-form.component';
 import { FoodAddComponent } from './components/food-add/food-add.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { FoodEditComponent } from './components/food-edit/food-edit.component';
 
 const routes: Routes = [
   {
@@ -16,13 +23,19 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [RestaurantHomeComponent, FoodListComponent, FoodFormComponent, FoodAddComponent],
+  declarations: [RestaurantHomeComponent, FoodListComponent, FoodFormComponent, FoodAddComponent, FoodEditComponent],
   imports: [
     CommonModule,
     NgxMaskModule.forChild(),
     RouterModule.forChild(routes),
     SharedModule,
     MatPaginatorModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatAutocompleteModule
   ],
 })
 export class RestaurantModule {}

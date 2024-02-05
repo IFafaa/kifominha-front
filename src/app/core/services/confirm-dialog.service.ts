@@ -9,7 +9,7 @@ export class ConfirmDialogService {
     customClass: {
       confirmButton: 'btn btn-success',
       cancelButton: 'btn btn-danger',
-      actions: 'justify-content-center',
+      actions: 'justify-center',
     },
     buttonsStyling: false
   })

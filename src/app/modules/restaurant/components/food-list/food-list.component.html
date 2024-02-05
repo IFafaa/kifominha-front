@@ -24,16 +24,29 @@
           *ngFor="let food of foods; let i = index"
           [paginacao]="{ indice: i, pagina: pageIndex, limitePagina: 5 }"
         >
-          <td><img [src]="food.image" [alt]="food.name" /></td>
+          <td>
+            <img
+              [src]="food.image"
+              [alt]="food.name"
+              class="max-h-24 max-w-3max-h-24 rounded-lg"
+            />
+          </td>
           <td>{{ food.name }}</td>
           <td>{{ food.description }}</td>
           <td>{{ food.category.name }}</td>
           <td>{{ food.price | currency : "BRL" : "symbol" : "1.2-2" }}</td>
           <td>{{ food.serve }} pessoa(s)</td>
           <td>
-            <div class="flex gap-2 justify-center">
-              <default-button icon="edit"></default-button>
-              <default-button icon="delete" type="cancel"></default-button>
+            <div class="flex gap-2 flex-col">
+              <default-button
+                value="Editar"
+                (clickEvent)="editFood(food)"
+              ></default-button>
+              <default-button
+                value="Excluir"
+                type="cancel"
+                (clickEvent)="deleteFood(food)"
+              ></default-button>
             </div>
           </td>
         </tr>

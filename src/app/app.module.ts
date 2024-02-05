@@ -13,6 +13,9 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginationIntl } from './shared/config/custom.paginator.intl';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],
@@ -26,6 +29,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     NgxSpinnerModule,
+    MatSelectModule,
   ],
   providers: [
     {
@@ -37,6 +41,10 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: new CustomPaginationIntl().getCustomPaginationIntl(),
     },
   ],
   bootstrap: [AppComponent],

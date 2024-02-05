@@ -22,4 +22,16 @@ export class FoodService {
       params: _params,
     });
   }
+
+  registerFood(food: Omit<IFood, '_id'>): Observable<IFood> {
+    return this.http.post<IFood>(`${environment.api}food/`, food);
+  }
+
+  editFood(food: IFood, foodId: string): Observable<IFood> {
+    return this.http.put<IFood>(`${environment.api}food/${foodId}`, food);
+  }
+
+  deleteFood(food: IFood): Observable<void> {
+    return this.http.delete<void>(`${environment.api}food/${food._id}`);
+  }
 }
