@@ -1,13 +1,27 @@
 <div
   class="rounded overflow-hidden shadow-lg shadow-md transition-transform transform-gpu hover:scale-105 hover:cursor-pointer w-full"
 >
-  <img [src]="food.image" alt="Imagem da Comida" class="w-full" />
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">{{ food.name }}</div>
-    <p class="text-gray-700 text-base">{{ food.description }}</p>
+  <div class="w-full h-full">
+    <img
+      [src]="food.image"
+      [alt]="food.name"
+      class="bg-cover w-full h-full sm:h-48 md:h-60 lg:h-72 xl:h-80"
+    />
   </div>
   <div class="px-6 py-4">
-    <p class="text-gray-700 text-base">Serve {{ food.serve }} pessoa(s)</p>
+    <div
+      class="font-bold text-xl mb-2 overflow-hidden text-ellipsis whitespace-nowrap"
+    >
+      {{ food.name }}
+    </div>
+    <p class="text-gray-700 text-base overflow-hidden text-ellipsis whitespace-nowrap">
+      {{ food.description }}
+    </p>
+  </div>
+  <div class="px-6 py-4">
+    <p class="text-gray-700 text-base">
+      Serve {{ food.serve }} {{ food.serve === 1 ? "pessoa" : "pessoas" }}
+    </p>
     <strong class="text-green-600 text-xl text-base">
       {{ food.price | currency : "BRL" : "symbol" : "1.2-2" }}
     </strong>
