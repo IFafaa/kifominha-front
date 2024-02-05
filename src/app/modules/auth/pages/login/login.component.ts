@@ -6,6 +6,7 @@ import { TokenService } from '../../../../core/services/token.service';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -36,8 +37,13 @@ export class LoginComponent {
         this.tokenService.setToken(res.data.access_token);
         this.router.navigate([`/${this.userService.typeUser()}/home`]);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         this.toastrService.error(err.error.message);
+        if (err.status === 400) {
+          this.router.navigate([
+            `verify-email/${err.error.data.id}/${err.error.data.type}`,
+          ]);
+        }
       },
     });
   }

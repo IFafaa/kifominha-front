@@ -20,11 +20,12 @@ export class HeaderComponent {
     '/verify-email/:id/:type',
   ];
   url!: string;
-
+  hasLogged!: boolean;
   constructor(private router: Router, private tokenService: TokenService) {
     this.url = router.url;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        this.hasLogged = tokenService.getToken() !== null;
         this.url = event.url;
       }
     });
