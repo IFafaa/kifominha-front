@@ -26,10 +26,10 @@
           </mat-form-field>
         </div>
 
-        <div>
-          <div>Envie sua logo*</div>
+        <div class="my-2">
+          <div><span class="text-lg text-gray-500">Logo*</span></div>
           <div class="text-center">
-            <label for="fileInput">
+            <label for="fileInput" class="hover:cursor-pointer">
               <input
                 id="fileInput"
                 type="file"
@@ -37,16 +37,20 @@
                 class="hidden"
                 accept="image/*"
               />
-              <img
+              <div
                 *ngIf="imageUrl"
-                [src]="imageUrl"
-                alt="Uploaded Image"
-                class="mt-4 max-w-full rounded shadow-md"
-              />
+                class="w-[225px] h-[225px] bg-gray-50 border-dotted border-2 border-gray-500"
+              >
+                <img
+                  [src]="imageUrl"
+                  alt="Uploaded Image"
+                  class="max-w-full rounded shadow-md bg-cover"
+                />
+              </div>
               <span
                 *ngIf="!imageUrl"
                 class="block w-100 bg-gray-50 border-dotted border-2 border-gray-500 p-4"
-                >teste</span
+                >Envie a foto da sua logo</span
               >
             </label>
           </div>

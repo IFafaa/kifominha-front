@@ -10,7 +10,7 @@
   <div>
     <mat-tab-group>
       <mat-tab label="Restaurantes">
-        <div class="flex flex-wrap gap-3 max-w-[1024px] p-5">
+        <div class="flex flex-wrap gap-3 max-w-[1024px] p-6">
           <ng-container *ngIf="restaurants$ | async as restaurants">
             <ng-container *ngIf="restaurants.length; else noRestaurantTemplate">
               <app-restaurant-card
@@ -27,7 +27,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Itens">
-        <div class="flex flex-wrap gap-3 max-w-[1024px] p-5">
+        <div class="flex flex-wrap gap-3 max-w-[1024px] p-6">
           <ng-container *ngIf="foods$ | async as foods">
             <ng-container *ngIf="foods.length; else noFoodTemplate">
               <ng-container *ngFor="let food of foods">

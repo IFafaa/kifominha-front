@@ -54,7 +54,7 @@ export class RegisterRestaurantComponent implements OnInit {
   }
 
   getCategories() {
-    this.$categories = this.categoryService.getCategories()
+    this.$categories = this.categoryService.getCategories();
   }
 
   onFileSelected(event: any): void {
