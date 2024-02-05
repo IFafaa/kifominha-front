@@ -1,5 +1,28 @@
-<header class="w-full p-4 bg-gray-50 border-b shadow-sm" *ngIf="!routesToHidden.includes(url)">
-  <div class="flex justify-center">
-    <div class="mx-auto"><h2 class="">Ki Fominha</h2></div>
+<header
+  class="w-full p-4 bg-gray-50 border-b shadow-sm bg-[var(--primary)]"
+  *ngIf="!routesToHidden.includes(url)"
+>
+  <div class="w-[90%] mx-auto max-w-[1024px] flex justify-between items-center">
+    <div></div>
+    <div class="mx-auto"><h2 class="text-white">Ki Fominha</h2></div>
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <img
+          src="../../../../assets/images/icons/account_circle.svg"
+          alt="menu"
+        />
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logOut()">
+          <div class="w-full flex justify-between items-center">
+            <img
+              src="../../../../assets/images/icons/logout.svg"
+              alt="logout"
+            />
+            <span>Sair</span>
+          </div>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </header>
