@@ -1,13 +1,44 @@
 <div class="flex items-center justify-center h-screen bg-gray-100">
   <div class="p-8 bg-white shadow-md rounded-md mx-4">
     <h1 class="text-2xl font-semibold mb-4">Verificação de Código</h1>
-    <p>
+
+    <p class="text-gray-600">
       Foi enviado um código de verificação para o seu e-mail. Por favor, insira
       o código abaixo:
     </p>
 
+    <div class="w-100 my-5 min-h-28" *ngIf="time">
+      <div>
+        <mat-spinner
+          mode="determinate"
+          [value]="(time / 3) * 10"
+          class="mx-auto"
+        ></mat-spinner>
+      </div>
+
+      <div class="mt-11">
+        <p class="text-gray-600">
+          Após <strong>{{ time }}</strong> segundos, você poderá reenviar o
+          código para o seu e-mail.
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="w-100 my-5 min-h-28 flex items-center justify-center"
+      *ngIf="!time"
+    >
+      <p class="text-gray-600">
+        Não chegou o código?
+        <a (click)="sendAuthEmail()" class="hover:cursor-pointer"
+          >Clique aqui</a
+        >
+        para enviar novamente.
+      </p>
+    </div>
+
     <mat-form-field class="mt-4" appearance="fill">
-      <mat-label>Código de Verificação</mat-label>
+      <mat-label>Código de verificação</mat-label>
       <input
         matInput
         placeholder="Digite o código"
@@ -22,6 +53,12 @@
       </mat-error>
     </mat-form-field>
 
-    <div class="mt-4"><default-button value="Verificar" [disabled]="codeControl.invalid" (clickEvent)="verifyCode()"></default-button></div>
+    <div class="mt-4">
+      <default-button
+        value="Verificar"
+        [disabled]="codeControl.invalid"
+        (clickEvent)="verifyCode()"
+      ></default-button>
+    </div>
   </div>
 </div>

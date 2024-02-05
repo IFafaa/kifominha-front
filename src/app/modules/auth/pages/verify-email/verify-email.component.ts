@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ENUM_USER_TYPE } from 'src/app/shared/enums/user-type.enum';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { TokenService } from 'src/app/core/services/token.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-verify-email',
@@ -18,6 +19,8 @@ export class VerifyEmailComponent implements OnInit {
   ]);
   type!: ENUM_USER_TYPE;
   idUser!: string;
+
+  time!: number;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -33,6 +36,30 @@ export class VerifyEmailComponent implements OnInit {
       this.type = params['type'];
       this.idUser = params['id'];
     });
+
+    this.startTimer();
+  }
+
+  startTimer() {
+    this.time = 30;
+    const interval = setInterval(() => {
+      if (this.time === 0) {
+        clearInterval(interval);
+      } else {
+        this.time--;
+      }
+    }, 1000);
+  }
+
+  sendAuthEmail() {
+    this.authService
+      .sendAuthEmail(this.idUser)
+      .pipe(finalize(() => this.startTimer()))
+      .subscribe({
+        next: (res) => {
+          this.toastrService.success(res.message);
+        },
+      });
   }
 
   verifyCode() {

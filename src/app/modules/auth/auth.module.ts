@@ -12,6 +12,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NotAuthGuard } from 'src/app/core/guard/not-auth.guard';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgxMaskModule.forChild(),
     MatSelectModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AuthModule {}

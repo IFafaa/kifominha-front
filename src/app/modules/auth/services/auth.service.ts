@@ -57,4 +57,11 @@ export class AuthService {
       }
     );
   }
+
+  sendAuthEmail(id: string): Observable<IRequest<string>> {
+    return this.http.post<IRequest<string>>(
+      `${environment.api}auth/send/email/${id}`,
+      null
+    );
+  }
 }
