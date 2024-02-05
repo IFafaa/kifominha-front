@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ILogin } from '../../interfaces/login.interface';
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
@@ -27,6 +27,10 @@ export class LoginComponent {
     private readonly userService: UserService
   ) {}
 
+  ngOnInit(): void {
+    this.tokenService.removeToken();
+  }
+
   signIn() {
     if (this.form.invalid) {
       return;
@@ -34,8 +38,6 @@ export class LoginComponent {
     this.authService.signIn(this.form.value as ILogin).subscribe({
       next: (res) => {
         this.tokenService.setToken(res.data.access_token);
-        console.log(`/${this.userService.typeUser()}/home`);
-
         this.router.navigate([`/${this.userService.typeUser()}/home`]);
       },
       error: (err) => {
