@@ -5,7 +5,7 @@
     <default-button
       type="secondary"
       value="Exportar"
-      *ngIf="foods.length"
+      *ngIf="foods?.length"
       (clickEvent)="exportFoods()"
     ></default-button>
     <default-button value="Adicionar" (clickEvent)="addFood()"></default-button>
