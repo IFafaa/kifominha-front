@@ -24,6 +24,8 @@ export class FoodAddComponent {
   }
 
   createFood(food: Partial<IFood>) {
+    console.log(food);
+
     this.foodService
       .registerFood(food as Omit<IFood, '_id'>)
       .pipe(finalize(() => this.close(true)))

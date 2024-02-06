@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { ToastrService } from '../../../../core/services/toastr.service';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
+import { UploadService } from '../../../../core/services/upload.service';
+import { FormDataHelper } from 'src/app/core/helpers/form-data.helper';
 
 @Component({
   selector: 'app-food-form',
@@ -25,7 +27,8 @@ export class FoodFormComponent implements OnInit {
   });
   constructor(
     private readonly fb: FormBuilder,
-    private readonly toastrService: ToastrService
+    private readonly toastrService: ToastrService,
+    private readonly uploadService: UploadService
   ) {}
 
   ngOnInit(): void {
@@ -59,12 +62,12 @@ export class FoodFormComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.imageUrl = e.target.result;
-      this.form.controls.image.setValue(this.imageUrl);
+      this.form.controls.image.setValue(file);
     };
     reader.readAsDataURL(file);
   }
 
-  sendForm() {
+  async sendForm() {
     if (this.form.invalid) return;
     const food = {
       ...this.form.value,
@@ -72,6 +75,7 @@ export class FoodFormComponent implements OnInit {
         (category) => category._id === this.form.value.category
       )!,
     };
-    this.sendFormCallback.emit(food as Partial<IFood>);
+    const formData = FormDataHelper.objectToFormData(food as any);
+    this.sendFormCallback.emit(formData as any);
   }
 }

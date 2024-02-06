@@ -10,6 +10,7 @@ import { ENUM_USER_TYPE } from 'src/app/core/enums/user-type.enum';
 import { CategoryService } from '../../../../core/services/category.service';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/core/services/interfaces/category.interface';
+import { FormDataHelper } from 'src/app/core/helpers/form-data.helper';
 
 @Component({
   selector: 'app-register-restaurant',
@@ -78,7 +79,7 @@ export class RegisterRestaurantComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.imageUrl = e.target.result;
-      this.form.controls.logo.setValue(this.imageUrl);
+      this.form.controls.logo.setValue(file);
     };
     reader.readAsDataURL(file);
   }
@@ -144,17 +145,18 @@ export class RegisterRestaurantComponent implements OnInit {
     }
     const restaurant = this.form.value;
     delete restaurant.confirmPassword;
-    this.authService
-      .registerRestaurant(restaurant as IRegisterRestaurant)
-      .subscribe({
-        next: (res) => {
-          this.router.navigate([
-            `verify-email/${res.data.id}/${ENUM_USER_TYPE.RESTAURANT}`,
-          ]);
-        },
-        error: (err) => {
-          this.toastrService.error(err.error.message);
-        },
-      });
+
+    const formData = FormDataHelper.objectToFormData(restaurant as any);
+
+    this.authService.registerRestaurant(formData as any).subscribe({
+      next: (res) => {
+        this.router.navigate([
+          `verify-email/${res.data.id}/${ENUM_USER_TYPE.RESTAURANT}`,
+        ]);
+      },
+      error: (err) => {
+        this.toastrService.error(err.error.message);
+      },
+    });
   }
 }
