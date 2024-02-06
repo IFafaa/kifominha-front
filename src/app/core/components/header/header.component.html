@@ -3,8 +3,13 @@
   *ngIf="!routesToHidden.includes(url)"
 >
   <div class="w-[90%] mx-auto max-w-[1024px] flex justify-between items-center">
-    <div></div>
-    <div class="mx-auto"><h2 class="text-white">Ki Fominha</h2></div>
+    <div>
+      <img
+        class="w-20"
+        src="../../../../assets/images/logo/kifominha-logo.png"
+        alt="kifominha-logo"
+      />
+    </div>
     <div>
       <div *ngIf="hasLogged">
         <button mat-button [matMenuTriggerFor]="menu">

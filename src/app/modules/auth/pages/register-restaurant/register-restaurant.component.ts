@@ -25,7 +25,7 @@ export class RegisterRestaurantComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     name: ['', [Validators.required]],
     cnpj: ['', [Validators.required, cpfCnpjValidator()]],
-    phone: ['', [Validators.required, Validators.minLength(11)]],
+    phone: ['', [Validators.required, Validators.minLength(10)]],
     categories: [[], [Validators.required]],
     address: this.fb.group({
       cep: ['', [Validators.required, Validators.minLength(8)]],

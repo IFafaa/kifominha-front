@@ -56,9 +56,7 @@ export class ClientHomeComponent implements OnInit {
     const restaurantFilter = {
       name: filter,
     };
-    this.restaurants$ = this.restaurantService
-      .getRestaurants(restaurantFilter)
-      .pipe(share(), debounceTime(2000));
+    this.restaurants$ = this.restaurantService.getRestaurants(restaurantFilter);
   }
 
   getFoods(filter?: string) {
@@ -66,9 +64,7 @@ export class ClientHomeComponent implements OnInit {
       description: filter,
       name: filter,
     };
-    this.foods$ = this.foodService
-      .getFoods(foodFilter)
-      .pipe(share(), debounceTime(2000));
+    this.foods$ = this.foodService.getFoods(foodFilter);
   }
 
   viewRestaurant(restaurantId: string) {
