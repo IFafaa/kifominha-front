@@ -4,6 +4,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { TokenService } from '../../services/token.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { ToastrService } from '../../services/toastr.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +24,13 @@ export class HeaderComponent {
   ];
   url!: string;
   hasLogged!: boolean;
-  constructor(private router: Router, private tokenService: TokenService) {
+  constructor(
+    private readonly router: Router,
+    private readonly tokenService: TokenService,
+    private readonly toastrService: ToastrService,
+    private readonly authService: AuthService,
+    private readonly confirmDialogService: ConfirmDialogService
+  ) {
     this.url = router.url;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -34,5 +43,19 @@ export class HeaderComponent {
   logOut() {
     this.tokenService.removeToken();
     this.router.navigate(['/']);
+  }
+
+  deleteUser() {
+    const titleDialog = 'Deletar Conta';
+    const descDialog = 'Você realmente deseja deletar a sua conta?';
+    this.confirmDialogService.confirm(titleDialog, descDialog, () => {
+      this.authService.deleteUser().subscribe({
+        next: () => {
+          this.tokenService.removeToken();
+          this.router.navigate(['/']);
+          this.toastrService.success('Conta deletada com sucesso!');
+        },
+      });
+    });
   }
 }

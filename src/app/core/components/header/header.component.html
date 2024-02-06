@@ -20,6 +20,15 @@
           />
         </button>
         <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="deleteUser()">
+            <div class="w-full flex justify-between items-center">
+              <img
+                src="../../../../assets/images/icons/manage_accounts.svg"
+                alt="manageAccount"
+              />
+              <span>Excluir conta</span>
+            </div>
+          </button>
           <button mat-menu-item (click)="logOut()">
             <div class="w-full flex justify-between items-center">
               <img
