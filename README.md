@@ -9,6 +9,15 @@ solicitou um MVP para validar seu conhecimento
 
 [Ambiente](https://kifominha-app.vercel.app)
 
+## Tecnologias
+
+- Front-end:
+Angular,
+Angular Material,
+Tailwind,
+SweetAlert2
+
+
 ## Pré-requisitos
 Certifique-se de ter as seguintes ferramentas instaladas em seu ambiente de desenvolvimento:
 
