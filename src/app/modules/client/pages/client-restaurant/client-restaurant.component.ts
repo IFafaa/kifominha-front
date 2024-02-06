@@ -56,7 +56,6 @@ export class ClientRestaurantComponent implements OnInit {
             (food) => food.category._id === category.category._id
           ),
         }));
-        console.log(this.categories);
       },
     });
   }
