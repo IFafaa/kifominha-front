@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from '../../../../core/services/restaurant.service';
-import { Observable, share } from 'rxjs';
+import { Observable, finalize, share } from 'rxjs';
 import { IRestaurant } from 'src/app/core/services/interfaces/restaurant.interface';
 import { FoodService } from '../../../../core/services/food.service';
 import { IFood } from 'src/app/core/services/interfaces/food.interface';
@@ -30,25 +30,26 @@ export class ClientRestaurantComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.getRestaurant(params['id']);
-      this.getFoods(params['id']);
     });
   }
 
   getRestaurant(restaurantId: string) {
-    this.restaurantService.getRestaurant(restaurantId).subscribe({
-      next: (restaurant) => {
-        this.restaurant = restaurant;
-        this.categories = restaurant.categories.map((category) => ({
-          category: category as ICategory,
-          foods: [] as IFood[],
-        }));
-      },
-    });
+    this.restaurantService
+      .getRestaurant(restaurantId)
+      .pipe(finalize(() => this.getFoods(restaurantId)))
+      .subscribe({
+        next: (restaurant) => {
+          this.restaurant = restaurant;
+          this.categories = restaurant.categories.map((category) => ({
+            category: category as ICategory,
+            foods: [] as IFood[],
+          }));
+        },
+      });
   }
   getFoods(restaurantId: string) {
     this.foodService.getFoodsByRestaurant(restaurantId).subscribe({
       next: (foods) => {
-
         this.categories = this.categories.map((category) => ({
           ...category,
           foods: foods.filter(

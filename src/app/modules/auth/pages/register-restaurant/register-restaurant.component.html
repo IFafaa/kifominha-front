@@ -50,7 +50,7 @@
               <span
                 *ngIf="!imageUrl"
                 class="block w-100 bg-gray-50 border-dotted border-2 border-gray-500 p-4"
-                >Envie a foto da sua logo</span
+                >Envie a foto da logo</span
               >
             </label>
           </div>
@@ -92,12 +92,12 @@
             <mat-label>CNPJ</mat-label>
             <input
               matInput
-              placeholder="Digite seu CNPJ"
+              placeholder="Digite o CNPJ"
               formControlName="cnpj"
               mask="00.000.000/0000-00"
             />
             <mat-error *ngIf="form.controls.cnpj.hasError('required')"
-              >Por favor, digite o seu CNPJ</mat-error
+              >Por favor, digite o CNPJ</mat-error
             >
             <mat-error *ngIf="form.controls.cnpj.hasError('cpfCnpj')"
               >Por favor, digite um CNPJ válido</mat-error
@@ -107,18 +107,18 @@
 
         <div>
           <mat-form-field>
-            <mat-label>Celular</mat-label>
+            <mat-label>Telefone</mat-label>
             <input
               matInput
-              placeholder="Digite seu celular"
+              placeholder="Digite o telefone"
               formControlName="phone"
-              mask="(00) 0 0000-0000"
+              mask="(00) 0000-0000"
             />
             <mat-error *ngIf="form.controls.phone.hasError('required')"
-              >Por favor, digite o seu celular</mat-error
+              >Por favor, digite o telefone</mat-error
             >
             <mat-error *ngIf="form.controls.phone.hasError('minlength')"
-              >Por favor, digite um celular válido</mat-error
+              >Por favor, digite um telefone válido</mat-error
             >
           </mat-form-field>
         </div>
