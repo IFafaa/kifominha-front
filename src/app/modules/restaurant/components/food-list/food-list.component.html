@@ -1,7 +1,13 @@
 <div class="flex justify-between">
   <h2>Cardápio</h2>
 
-  <div>
+  <div class="flex gap-2">
+    <default-button
+      type="secondary"
+      value="Exportar"
+      *ngIf="foods.length"
+      (clickEvent)="exportFoods()"
+    ></default-button>
     <default-button value="Adicionar" (clickEvent)="addFood()"></default-button>
   </div>
 </div>

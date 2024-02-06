@@ -9,6 +9,7 @@ import { ToastrService } from '../../../../core/services/toastr.service';
 import { finalize } from 'rxjs';
 import { ConfirmDialogService } from '../../../../core/services/confirm-dialog.service';
 import { FoodEditComponent } from '../food-edit/food-edit.component';
+import { Export } from 'src/app/core/helpers/helper.helper';
 
 @Component({
   selector: 'app-food-list',
@@ -108,5 +109,18 @@ export class FoodListComponent implements OnInit {
           },
         });
     });
+  }
+
+  exportFoods(){
+    const array = this.foods.map((food) => ({
+      foto: food.image,
+      nome: food.name,
+      descricao: food.description,
+      preco: food.price,
+      serve: food.serve,
+
+    }));
+    const filename = `${this.restaurant.name.replace(/\s/g, '')}_${Date.now()}`
+    Export.exportToCsv(array, filename);
   }
 }
