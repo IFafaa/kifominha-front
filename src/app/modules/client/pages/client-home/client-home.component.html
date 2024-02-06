@@ -1,6 +1,6 @@
 <div class="w-[90%] mx-auto max-w-[1024px] my-5">
   <h1 class=  "text-6xl font-bold">
-    Olá <strong class="capitalize">{{ client.name.split(" ")[0] }}</strong>
+    Olá, <strong class="capitalize">{{ client.name.split(" ")[0] }}</strong>!
   </h1>
 
   <div class="my-4">
@@ -17,7 +17,7 @@
                 *ngFor="let restaurant of restaurants"
                 [restaurant]="restaurant"
                 (click)="viewRestaurant(restaurant._id)"
-                class="w-full sm:w-1/2 md:w-1/2 lg:1/3 p-2"
+                class="w-full sm:w-1/2 md:w-1/3 p-2"
               ></app-restaurant-card>
             </ng-container>
           </ng-container>
