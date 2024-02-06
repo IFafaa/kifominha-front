@@ -46,7 +46,7 @@
         *ngFor="let category of categories"
         [label]="category.category.name"
       >
-        <div class="flex flex-wrap max-w-[1024px] p-6">
+        <div class="flex flex-wrap max-w-[1024px] overflow-hidden mt-2">
           <ng-container *ngIf="category.foods.length; else noFoodTemplate">
             <ng-container *ngFor="let food of category.foods">
               <app-food-card
@@ -57,7 +57,9 @@
             </ng-container>
           </ng-container>
           <ng-template #noFoodTemplate>
-            <p class="text-center w-full p-7">Nenhum prato encontrado.</p>
+            <p class="text-center w-full p-7 text-gray-600">
+              Nenhum prato encontrado.
+            </p>
           </ng-template>
         </div>
       </mat-tab>
