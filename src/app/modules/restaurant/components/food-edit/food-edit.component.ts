@@ -27,13 +27,10 @@ export class FoodEditComponent {
     this.ref.close(created);
   }
 
-  editFood(food: Partial<IFood>) {
-    const _food = {
-      ...food,
-      restaurant_id: this.info.food.restaurant_id,
-    };
+  editFood(food: FormData) {
+    food.append('restaurant_id', this.info.food.restaurant_id);
     this.foodService
-      .editFood(_food as IFood, this.info.food._id)
+      .editFood(food, this.info.food._id)
       .pipe(finalize(() => this.close(true)))
       .subscribe({
         next: () => {

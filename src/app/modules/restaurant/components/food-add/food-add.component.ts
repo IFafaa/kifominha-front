@@ -23,11 +23,9 @@ export class FoodAddComponent {
     this.ref.close(created);
   }
 
-  createFood(food: Partial<IFood>) {
-    console.log(food);
-
+  createFood(food: FormData) {
     this.foodService
-      .registerFood(food as Omit<IFood, '_id'>)
+      .registerFood(food)
       .pipe(finalize(() => this.close(true)))
       .subscribe({
         next: () => {

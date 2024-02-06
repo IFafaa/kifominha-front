@@ -14,7 +14,7 @@ import { FormDataHelper } from 'src/app/core/helpers/form-data.helper';
 export class FoodFormComponent implements OnInit {
   @Input() restaurant!: IRestaurant;
   @Input() food?: IFood;
-  @Output() sendFormCallback = new EventEmitter<Partial<IFood>>();
+  @Output() sendFormCallback = new EventEmitter<FormData>();
   imageUrl!: string;
 
   form = this.fb.group({
@@ -76,6 +76,6 @@ export class FoodFormComponent implements OnInit {
       )!,
     };
     const formData = FormDataHelper.objectToFormData(food as any);
-    this.sendFormCallback.emit(formData as any);
+    this.sendFormCallback.emit(formData);
   }
 }

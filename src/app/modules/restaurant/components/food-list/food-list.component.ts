@@ -34,10 +34,11 @@ export class FoodListComponent implements OnInit {
   }
 
   getFoods() {
+    this.statusList = ENUM_STATUS_LIST.IDLE;
     this.foodService.getFoodsByRestaurant(this.restaurant._id).subscribe({
       next: (foods) => {
         this.foods = foods;
-        if (!this.foods.length) {
+        if (!foods.length) {
           this.statusList = ENUM_STATUS_LIST.NOTFOUND;
         }
       },
@@ -77,7 +78,7 @@ export class FoodListComponent implements OnInit {
       maxWidth: '420px',
       data: {
         restaurant: this.restaurant,
-        food: food
+        food: food,
       },
     };
     this.matDialog
