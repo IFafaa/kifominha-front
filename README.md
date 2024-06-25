@@ -36,7 +36,7 @@ git clone https://github.com/IFafaa/kifominha-app
 Navegue até o diretório do projeto:
 
 ```
-cd kifominha-app
+cd kifominha-front
 ```
 
 Altere o ambiente para o ambiente de desenvolvimento:
